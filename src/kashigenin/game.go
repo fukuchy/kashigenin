@@ -4,32 +4,33 @@ import (
     "log"
     "image/color"
     _ "image/png"
-    // "github.com/fukuchy/kashigenin/src/image"
+    "github.com/fukuchy/kashigenin/src/image"
     "github.com/hajimehoshi/ebiten/v2"
     "github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 const (
-	ScreenWidth  = 1200
+	ScreenWidth  = 960 
 	ScreenHeight = 840
 )
-var img_haikei *ebiten.Image
-var img_player *ebiten.Image
-var img_playerDown *ebiten.Image
+
+var Img_haikei *ebiten.Image
+var Img_player *ebiten.Image
+var Img_playerDown *ebiten.Image
+
 func init () {
     var err error
-    img_haikei, _, err = ebitenutil.NewImageFromFile("github.com/fukuchy/kashigenin/material/haikei3.png")
+    Img_haikei, _, err = ebitenutil.NewImageFromFile("material/haikei3.png")
     if err != nil {
         log.Fatal(err)
     }
-    img_player, _, err = ebitenutil.NewImageFromFile("github.com/fukuchy/kashigenin/material/player.png")
+    Img_player, _, err = ebitenutil.NewImageFromFile("material/player.png")
     if err != nil {
         log.Fatal(err)
     }
-    img_haikei, _, err = ebitenutil.NewImageFromFile("github.com/fukuchy/kashigenin/material/playerDown.png")
+    Img_playerDown, _, err = ebitenutil.NewImageFromFile("material/playerDown.png")
     if err != nil {
         log.Fatal(err)
     }
-
 }
 type Game struct{}
 
@@ -38,23 +39,25 @@ func NewGame() (*Game, error) {
     return g, nil
 }
 
+func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
+	return ScreenWidth, ScreenHeight
+}
+
 func (g *Game) Update() error {
+    Move()
     return nil
 
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.RGBA{255, 245, 228, 0xff})
-	// image.Draw(screen, img_haikei, 1.0, 120, 120, 0)
-	// if move.Down_flag == false {
-	// 	image.Draw(screen, img_player, 1.0, move.Playerx, move.Playery, 0)
-	// } else {
-	// 	image.Draw(screen, img_playerDown, 1.0, move.Playerx, move.Playery+120, 0)
-
-	// }
+	image.Draw(screen, Img_haikei, 1.0, 120, 120, 0)
+	if Down_flag == false {
+		image.Draw(screen, Img_player, 1.0, Playerx, Playery, 0)
+	} else {
+		image.Draw(screen, Img_playerDown, 1.0, Playerx, Playery+120, 0)
+	}
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return ScreenWidth, ScreenHeight
-}
+
 
