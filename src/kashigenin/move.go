@@ -17,22 +17,20 @@ var Press_count int
 var Player Person = *NewPlayer()
 
 func NewPlayer() *Person {
-	player_body := &Rectangle{
-		x:      420,
-		y:      360,
-		width:  120,
-		height: 360,
-	}
-	player_kasa := &Rectangle{
-		x:      420,
-		y:      330,
-		width:  240,
-		height: 30,
-	}
 	Player := &Person{
-		body: player_body,
-		kasa: player_kasa,
-        mae: true,
+		body: &Rectangle{
+			x:      420,
+			y:      360,
+			width:  120,
+			height: 360,
+		},
+		kasa: &Rectangle{
+			x:      420,
+			y:      330,
+			width:  240,
+			height: 30,
+		},
+		num: 0,
 	}
 	return Player
 }
@@ -63,14 +61,14 @@ func Move() {
 			Press_flag = true
 		}
 		if ebiten.IsKeyPressed(ebiten.KeyRight) {
-			if Player.body.x < 720 {
+			if Player.body.x < RightLimit {
 				Player.body.x += 60
 				Player.kasa.x += 60
 			}
 			Press_flag = true
 		}
 		if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-			if Player.body.x > 120 {
+			if Player.body.x > LeftLimit {
 				Player.body.x -= 60
 				Player.kasa.x -= 60
 			}

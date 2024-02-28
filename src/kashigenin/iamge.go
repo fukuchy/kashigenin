@@ -1,10 +1,11 @@
 package kashigenin
 
 import (
-	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	_ "image/png"
 	"log"
+
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
 var Img_haikei *ebiten.Image
@@ -14,7 +15,7 @@ var Img_kasa *ebiten.Image
 
 func init() {
 	var err error
-	Img_haikei, _, err = ebitenutil.NewImageFromFile("material/haikei4.png")
+	Img_haikei, _, err = ebitenutil.NewImageFromFile("material/haikei3.png")
 	if err != nil {
 		log.Fatal(err)
 	}

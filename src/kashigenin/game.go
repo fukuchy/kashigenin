@@ -1,10 +1,11 @@
 package kashigenin
 
 import (
-	"github.com/fukuchy/kashigenin/src/image"
-	"github.com/hajimehoshi/ebiten/v2"
 	"image/color"
 	_ "image/png"
+
+	"github.com/fukuchy/kashigenin/src/image"
+	"github.com/hajimehoshi/ebiten/v2"
 )
 
 const (
@@ -25,6 +26,8 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func (g *Game) Update() error {
 	Move()
+	pop_passers()
+	PasserHit()
 	return nil
 }
 
@@ -32,4 +35,5 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.RGBA{255, 245, 228, 0xff})
 	image.Draw(screen, Img_haikei, 1.0, 120, 120, 0)
 	Player_Draw(screen)
+	PassersDraw(screen)
 }
