@@ -26,7 +26,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func (g *Game) Update() error {
 	Move()
-	// pop_passers()
+	pop_passers()
 	return nil
 }
 
