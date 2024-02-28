@@ -1,6 +1,8 @@
 package kashigenin
 
 import (
+	"fmt"
+
 	"github.com/fukuchy/kashigenin/src/image"
 	"github.com/hajimehoshi/ebiten/v2"
 )
@@ -31,7 +33,7 @@ var passers_list = []Person{
 			height: 360,
 		},
 		kasa: &Rectangle{
-			x:      120,
+			x:      240,
 			y:      330,
 			width:  240,
 			height: 30,
@@ -50,8 +52,9 @@ func PassersDraw(screen *ebiten.Image) {
 }
 
 func PasserHit() {
-	for i, passer := range passers {
-		if perhit(Player, passer) {
+	for i := len(passers) - 1; i >= 0; i-- {
+		if perhit(Player, passers[i]) {
+			fmt.Println("HIT!!")
 			passers = append(passers[:i], passers[i+1:]...)
 		}
 	}
@@ -61,7 +64,17 @@ func pop_passers() {
 	if counter%200 == 0 {
 		passers = append(passers, passers_list[0])
 	}
-	if counter%500 == 0 {
+	if counter%200 == 0 {
+		passers = append(passers, passers_list[1])
+	}
+	if counter == 400 {
+		fmt.Println("NOW!!!")
+	}
+	if counter >= 400 {
+
+		PasserHit()
+	}
+	if counter == 500 {
 		passers = nil
 		counter = 0
 	}
