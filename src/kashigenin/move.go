@@ -16,17 +16,6 @@ var Up_flag bool = false
 var Press_count int
 var Player Person = *NewPlayer()
 
-type Rectangle struct {
-	x      float64
-	y      float64
-	width  float64
-	height float64
-}
-type Person struct {
-	body *Rectangle
-	kasa *Rectangle
-}
-
 func NewPlayer() *Person {
 	player_body := &Rectangle{
 		x:      420,
@@ -43,6 +32,7 @@ func NewPlayer() *Person {
 	Player := &Person{
 		body: player_body,
 		kasa: player_kasa,
+        mae: true,
 	}
 	return Player
 }
