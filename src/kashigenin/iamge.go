@@ -10,7 +10,8 @@ import (
 
 var Img_haikei *ebiten.Image
 var Img_player *ebiten.Image
-var Img_playerDown *ebiten.Image
+var Img_passer0 *ebiten.Image
+var Img_passer1 *ebiten.Image
 var Img_kasa *ebiten.Image
 
 func init() {
@@ -23,7 +24,11 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Img_playerDown, _, err = ebitenutil.NewImageFromFile("material/playerDown.png")
+	Img_passer0, _, err = ebitenutil.NewImageFromFile("material/passer0.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	Img_passer1, _, err = ebitenutil.NewImageFromFile("material/passer1.png")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -9,44 +9,21 @@ import (
 
 var counter int
 
-var passers_list = []Person{
-	{
-		body: &Rectangle{
-			x:      660,
-			y:      360,
-			width:  120,
-			height: 360,
-		},
-		kasa: &Rectangle{
-			x:      660,
-			y:      330,
-			width:  240,
-			height: 30,
-		},
-		num: 1,
-	},
-	{
-		body: &Rectangle{
-			x:      240,
-			y:      360,
-			width:  120,
-			height: 360,
-		},
-		kasa: &Rectangle{
-			x:      240,
-			y:      330,
-			width:  240,
-			height: 30,
-		},
-		num: 2,
-	},
-}
-
 var passers []Person
 
 func PassersDraw(screen *ebiten.Image) {
 	for _, passer := range passers {
-		image.Draw(screen, Img_player, 1.0, passer.body.x, passer.body.y, 0)
+		switch passer.num {
+		case 0:
+			image.Draw(screen, Img_passer0, 1.0, passer.body.x, passer.body.y, 0)
+		case 1:
+			image.Draw(screen, Img_passer1, 1.0, passer.body.x, passer.body.y, 0)
+		case 2:
+			image.Draw(screen, Img_passer1, 1.0, passer.body.x, passer.body.y, 0)
+		case 3:
+			image.Draw(screen, Img_passer1, 1.0, passer.body.x, passer.body.y, 0)
+		}
+
 		image.Draw(screen, Img_kasa, 1.0, passer.kasa.x, passer.kasa.y, 0)
 	}
 }
@@ -62,10 +39,7 @@ func PasserHit() {
 func pop_passers() {
 	counter++
 	if counter%200 == 0 {
-		passers = append(passers, passers_list[0])
-	}
-	if counter%200 == 0 {
-		passers = append(passers, passers_list[1])
+		passers = append(passers, Passers_list[1]...)
 	}
 	if counter == 400 {
 		fmt.Println("NOW!!!")
