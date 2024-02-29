@@ -3,11 +3,15 @@ package kashigenin
 import (
 	"image/color"
 	_ "image/png"
+	"log"
 	"strconv"
 
 	"github.com/fukuchy/kashigenin/src/image"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
+	"github.com/hajimehoshi/ebiten/v2/text"
+	"golang.org/x/image/font"
+	"golang.org/x/image/font/opentype"
 )
 
 const (
@@ -21,9 +25,27 @@ const (
 )
 
 var Score int
+var mplusNormalFont font.Face
 
 type Game struct {
 	Status int
+}
+
+func init() {
+	tt, err := opentype.Parse(fonts.MPlus1pRegular_ttf)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	const dpi = 72
+	mplusNormalFont, err = opentype.NewFace(tt, &opentype.FaceOptions{
+		Size:    24,
+		DPI:     dpi,
+		Hinting: font.HintingVertical,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func NewGame() (*Game, error) {
@@ -73,9 +95,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if Yokero_flag {
 			image.Draw(screen, Img_yokero, 1.0, 180, 180, 0)
 		}
-		ebitenutil.DebugPrint(screen, "Score: "+strconv.Itoa(Score))
+		text.Draw(screen, "Score: "+strconv.Itoa(Score), mplusNormalFont, 0, 30, color.White)
 		image.Draw(screen, Img_setsumei, 1.0, 0, 720, 0)
 	case 2:
 		image.Draw(screen, Img_gameover, 1.0, 180, 180, 0)
+		text.Draw(screen, "Score: "+strconv.Itoa(Score), mplusNormalFont, 450, 450, color.Black)
 	}
 }
