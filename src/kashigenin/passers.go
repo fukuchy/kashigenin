@@ -2,7 +2,6 @@ package kashigenin
 
 import (
 	"crypto/rand"
-	"fmt"
 	"math/big"
 
 	"github.com/fukuchy/kashigenin/src/image"
@@ -48,7 +47,7 @@ func pop_passers() bool {
 
 	if Counter == 200 {
 		list_num, err := rand.Int(rand.Reader, big.NewInt(int64(len(Passers_list))))
-		fmt.Println(list_num)
+		// fmt.Println(list_num)
 		if err != nil {
 			panic(err)
 		}
