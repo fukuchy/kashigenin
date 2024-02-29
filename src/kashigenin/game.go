@@ -4,6 +4,7 @@ import (
 	"image/color"
 	_ "image/png"
 	"log"
+	"os"
 	"strconv"
 
 	"github.com/fukuchy/kashigenin/src/image"
@@ -78,6 +79,9 @@ func (g *Game) Update() error {
 			Passers = nil
 			g.Status = 1
 		}
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyEscape) {
+		os.Exit(0)
 	}
 	return nil
 }
