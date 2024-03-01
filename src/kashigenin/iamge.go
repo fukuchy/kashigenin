@@ -2,10 +2,9 @@ package kashigenin
 
 import (
 	_ "image/png"
-	"log"
 
+	"github.com/fukuchy/kashigenin/src/image"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
 var (
@@ -24,58 +23,19 @@ var (
 	Img_setsumei *ebiten.Image
 )
 
-func init_img() {
-	var err error
-	Img_haikei, _, err = ebitenutil.NewImageFromFile("material/haikei7.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_player, _, err = ebitenutil.NewImageFromFile("material/player2.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_passer0, _, err = ebitenutil.NewImageFromFile("material/passer0.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_passer1, _, err = ebitenutil.NewImageFromFile("material/passer1.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_passer2, _, err = ebitenutil.NewImageFromFile("material/passer2.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_passer3, _, err = ebitenutil.NewImageFromFile("material/passer3.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_kasa_mae, _, err = ebitenutil.NewImageFromFile("material/kasa4.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_kasa, _, err = ebitenutil.NewImageFromFile("material/kasa5.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_kasa_tsuka, _, err = ebitenutil.NewImageFromFile("material/kasa_tsuka.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_yokero, _, err = ebitenutil.NewImageFromFile("material/yokero2.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_title, _, err = ebitenutil.NewImageFromFile("material/title2.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_gameover, _, err = ebitenutil.NewImageFromFile("material/gameover.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-	Img_setsumei, _, err = ebitenutil.NewImageFromFile("material/setsumei.png")
-	if err != nil {
-		log.Fatal(err)
-	}
+func Init_img() {
+	Img_haikei = image.Load("material/haikei7.png")
+	Img_player = image.Load("material/player2.png")
+	Img_passer0 = image.Load("material/passer0.png")
+	Img_passer1 = image.Load("material/passer1.png")
+	Img_passer2 = image.Load("material/passer2.png")
+	Img_passer3 = image.Load("material/passer3.png")
+	Img_kasa_mae = image.Load("material/kasa4.png")
+	Img_kasa = image.Load("material/kasa5.png")
+	Img_kasa_tsuka = image.Load("material/kasa_tsuka.png")
+	Img_yokero = image.Load("material/yokero2.png")
+	Img_title = image.Load("material/title2.png")
+	Img_gameover = image.Load("material/gameover.png")
+	Img_setsumei = image.Load("material/setsumei.png")
+
 }

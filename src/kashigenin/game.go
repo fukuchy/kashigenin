@@ -47,7 +47,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	init_img()
+	Init_img()
 }
 
 func NewGame() (*Game, error) {
