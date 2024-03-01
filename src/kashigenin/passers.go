@@ -17,17 +17,17 @@ func PassersDraw(screen *ebiten.Image) {
 	for _, passer := range Passers {
 		switch passer.num {
 		case 0:
-			image.Draw(screen, Img_passer0, 1.0, passer.body.x, passer.body.y, 0)
-			image.Draw(screen, Img_kasa_mae, 1.0, passer.kasa.x, passer.kasa.y, 0)
+			image.Draw(screen, Img_passer0, passer.body.x, passer.body.y, 0)
+			image.Draw(screen, Img_kasa_mae, passer.kasa.x, passer.kasa.y, 0)
 		case 1:
-			image.Draw(screen, Img_passer1, 1.0, passer.body.x, passer.body.y, 0)
-			image.Draw(screen, Img_kasa_mae, 1.0, passer.kasa.x, passer.kasa.y, 0)
+			image.Draw(screen, Img_passer1, passer.body.x, passer.body.y, 0)
+			image.Draw(screen, Img_kasa_mae, passer.kasa.x, passer.kasa.y, 0)
 		case 2:
-			image.Draw(screen, Img_passer2, 1.0, passer.body.x, passer.body.y, 0)
-			image.Draw(screen, Img_kasa_mae, 1.0, passer.kasa.x, passer.kasa.y, 0)
+			image.Draw(screen, Img_passer2, passer.body.x, passer.body.y, 0)
+			image.Draw(screen, Img_kasa_mae, passer.kasa.x, passer.kasa.y, 0)
 		case 3:
-			image.Draw(screen, Img_passer3, 1.0, passer.body.x, passer.body.y, 0)
-			image.Draw(screen, Img_kasa_mae, 1.0, passer.kasa.x, passer.kasa.y, 0)
+			image.Draw(screen, Img_passer3, passer.body.x, passer.body.y, 0)
+			image.Draw(screen, Img_kasa_mae, passer.kasa.x, passer.kasa.y, 0)
 		}
 
 	}

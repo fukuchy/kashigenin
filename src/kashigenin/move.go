@@ -112,16 +112,16 @@ func Move() {
 
 func Player_Draw(screen *ebiten.Image) {
 	if Kashige_flag_hidari {
-		image.Draw_kasa(screen, Img_kasa_tsuka, 1.0, Player.body.x, Player.kasa.y-30, -30)
-		image.Draw(screen, Img_player, 1.0, Player.body.x, Player.body.y+15, 0)
-		image.Draw_kasa(screen, Img_kasa, 1.0, Player.body.x, Player.kasa.y-30, -30)
+		image.Draw_kasa(screen, Img_kasa_tsuka, Player.body.x, Player.kasa.y-30, -30)
+		image.Draw(screen, Img_player, Player.body.x, Player.body.y+15, 0)
+		image.Draw_kasa(screen, Img_kasa, Player.body.x, Player.kasa.y-30, -30)
 	} else if Kashige_flag_migi {
-		image.Draw_kasa(screen, Img_kasa_tsuka, 1.0, Player.body.x-120, Player.kasa.y-30, 30)
-		image.Draw(screen, Img_player, 1.0, Player.body.x, Player.body.y+15, 0)
-		image.Draw_kasa(screen, Img_kasa, 1.0, Player.body.x-120, Player.kasa.y-30, 30)
+		image.Draw_kasa(screen, Img_kasa_tsuka, Player.body.x-120, Player.kasa.y-30, 30)
+		image.Draw(screen, Img_player, Player.body.x, Player.body.y+15, 0)
+		image.Draw_kasa(screen, Img_kasa, Player.body.x-120, Player.kasa.y-30, 30)
 	} else {
-		image.Draw_kasa(screen, Img_kasa_tsuka, 1.0, Player.kasa.x, Player.kasa.y, 0)
-		image.Draw(screen, Img_player, 1.0, Player.body.x, Player.body.y+15, 0)
-		image.Draw_kasa(screen, Img_kasa, 1.0, Player.kasa.x, Player.kasa.y, 0)
+		image.Draw_kasa(screen, Img_kasa_tsuka, Player.kasa.x, Player.kasa.y, 0)
+		image.Draw(screen, Img_player, Player.body.x, Player.body.y+15, 0)
+		image.Draw_kasa(screen, Img_kasa, Player.kasa.x, Player.kasa.y, 0)
 	}
 }

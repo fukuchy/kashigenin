@@ -16,20 +16,20 @@ import (
 )
 
 const (
-	ScreenWidth  = 960
-	ScreenHeight = 840
-)
-const (
 	Status_home = iota
 	Status_alive
 	Status_dead
 )
 
-var Score int
-var mplusNormalFont font.Face
+var (
+	Score           int
+	mplusNormalFont font.Face
+)
 
 type Game struct {
-	Status int
+	Status       int
+	ScreenWidth  int
+	ScreenHeight int
 }
 
 func init() {
@@ -47,17 +47,20 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	init_img()
 }
 
 func NewGame() (*Game, error) {
 	g := &Game{
-		Status: 0,
+		Status:       0,
+		ScreenWidth:  960,
+		ScreenHeight: 840,
 	}
 	return g, nil
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return ScreenWidth, ScreenHeight
+	return g.ScreenWidth, g.ScreenHeight
 }
 
 func (g *Game) Update() error {
@@ -88,21 +91,21 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.RGBA{255, 245, 228, 0xff})
-	image.Draw(screen, Img_haikei, 1.0, 0, 0, 0)
+	image.Draw(screen, Img_haikei, 0, 0, 0)
 	switch g.Status {
 	case 0:
-		image.Draw(screen, Img_title, 1.0, 180, 120, 0)
-		image.Draw(screen, Img_setsumei, 1.0, 0, 720, 0)
+		image.Draw(screen, Img_title, 180, 120, 0)
+		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 1:
 		Player_Draw(screen)
 		PassersDraw(screen)
 		if Yokero_flag {
-			image.Draw(screen, Img_yokero, 1.0, 180, 180, 0)
+			image.Draw(screen, Img_yokero, 180, 180, 0)
 		}
 		text.Draw(screen, "Score: "+strconv.Itoa(Score), mplusNormalFont, 0, 30, color.White)
-		image.Draw(screen, Img_setsumei, 1.0, 0, 720, 0)
+		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 2:
-		image.Draw(screen, Img_gameover, 1.0, 180, 180, 0)
+		image.Draw(screen, Img_gameover, 180, 180, 0)
 		text.Draw(screen, "Score: "+strconv.Itoa(Score), mplusNormalFont, 450, 450, color.Black)
 	}
 }

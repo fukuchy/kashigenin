@@ -8,21 +8,23 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-var Img_haikei *ebiten.Image
-var Img_player *ebiten.Image
-var Img_passer0 *ebiten.Image
-var Img_passer1 *ebiten.Image
-var Img_passer2 *ebiten.Image
-var Img_passer3 *ebiten.Image
-var Img_kasa *ebiten.Image
-var Img_kasa_mae *ebiten.Image
-var Img_kasa_tsuka *ebiten.Image
-var Img_yokero *ebiten.Image
-var Img_title *ebiten.Image
-var Img_gameover *ebiten.Image
-var Img_setsumei *ebiten.Image
+var (
+	Img_haikei,
+	Img_player,
+	Img_passer0,
+	Img_passer1,
+	Img_passer2,
+	Img_passer3,
+	Img_kasa,
+	Img_kasa_mae,
+	Img_kasa_tsuka,
+	Img_yokero,
+	Img_title,
+	Img_gameover,
+	Img_setsumei *ebiten.Image
+)
 
-func init() {
+func init_img() {
 	var err error
 	Img_haikei, _, err = ebitenutil.NewImageFromFile("material/haikei7.png")
 	if err != nil {
