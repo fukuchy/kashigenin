@@ -42,6 +42,7 @@ func PasserHit() bool {
 	}
 	return false
 }
+
 func pop_passers() bool {
 	Counter++
 
@@ -56,7 +57,6 @@ func pop_passers() bool {
 		Yokero_flag = true
 	}
 	if Counter >= 400 {
-
 		if PasserHit() {
 			return true
 		}
