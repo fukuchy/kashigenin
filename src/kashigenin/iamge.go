@@ -37,5 +37,4 @@ func Init_img() {
 	Img_title = image.Load("material/title2.png")
 	Img_gameover = image.Load("material/gameover.png")
 	Img_setsumei = image.Load("material/setsumei.png")
-
 }

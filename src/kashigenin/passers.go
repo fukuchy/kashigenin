@@ -47,11 +47,9 @@ func pop_passers() bool {
 
 	if Counter == 200 {
 		list_num, err := rand.Int(rand.Reader, big.NewInt(int64(len(Passers_list))))
-		// fmt.Println(list_num)
 		if err != nil {
 			panic(err)
 		}
-		// Passers = append(Passers, Passers_list[3]...)
 		Passers = append(Passers, Passers_list[int(list_num.Int64())]...)
 	}
 	if Counter == 400 {

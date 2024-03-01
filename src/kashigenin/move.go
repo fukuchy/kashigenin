@@ -11,15 +11,17 @@ const (
 	RightLimit = 720
 )
 
-var Press_flag bool = false
-var Up_flag bool = false
-var Kashige_flag_hidari = false
-var Kashige_flag_migi = false
-var Press_count int
-var Player Person = *NewPlayer()
+var (
+	press_flag,
+	up_flag,
+	kashige_flag_left,
+	kashige_flag_right bool
+	press_count int
+	Player      Person = *NewPlayer()
+)
 
 func NewPlayer() *Person {
-	Player := &Person{
+	player := &Person{
 		body: &Rectangle{
 			x:      420,
 			y:      360,
@@ -34,29 +36,29 @@ func NewPlayer() *Person {
 		},
 		num: 0,
 	}
-	return Player
+	return player
 }
 
 func Move() {
-	if !Press_flag {
-		if !Kashige_flag_hidari && !Kashige_flag_migi {
+	if !press_flag {
+		if !kashige_flag_left && !kashige_flag_right {
 			if ebiten.IsKeyPressed(ebiten.KeyUp) {
 				if Player.kasa.y > 210 {
 					Player.kasa.y -= 120
 				}
 				if Player.kasa.y == 210 {
-					Up_flag = true
+					up_flag = true
 				}
-				Press_flag = true
+				press_flag = true
 			}
 			if ebiten.IsKeyPressed(ebiten.KeyDown) {
 				if Player.kasa.y < 330 {
 					Player.kasa.y += 120
 				}
-				if Up_flag {
-					Up_flag = false
+				if up_flag {
+					up_flag = false
 				}
-				Press_flag = true
+				press_flag = true
 			}
 		}
 		if ebiten.IsKeyPressed(ebiten.KeyRight) {
@@ -64,62 +66,65 @@ func Move() {
 				Player.body.x += 60
 				Player.kasa.x += 60
 			}
-			Press_flag = true
+			press_flag = true
 		}
 		if ebiten.IsKeyPressed(ebiten.KeyLeft) {
 			if Player.body.x > LeftLimit {
 				Player.body.x -= 60
 				Player.kasa.x -= 60
 			}
-			Press_flag = true
+			press_flag = true
 		}
 		if ebiten.IsKeyPressed(ebiten.KeyQ) {
-			if Player.kasa.y >= 330 && Player.kasa.y < 390 {
+			switch {
+			case Player.kasa.y >= 330 && Player.kasa.y < 390:
 				Player.kasa.y += 60
 				Player.kasa.x -= 60
 				Player.kasa.width -= 60
-				Kashige_flag_hidari = true
-				Press_flag = true
-			} else if Kashige_flag_migi {
+				kashige_flag_left = true
+				press_flag = true
+			case kashige_flag_right:
 				Player.kasa.y -= 60
 				Player.kasa.width += 60
-				Kashige_flag_migi = false
-				Press_flag = true
+				kashige_flag_right = false
+				press_flag = true
 			}
 		}
 		if ebiten.IsKeyPressed(ebiten.KeyE) {
-			if Player.kasa.y >= 330 && Player.kasa.y < 390 {
+			switch {
+			case Player.kasa.y >= 330 && Player.kasa.y < 390:
 				Player.kasa.y += 60
 				Player.kasa.width -= 60
-				Kashige_flag_migi = true
-				Press_flag = true
-			} else if Kashige_flag_hidari {
+				kashige_flag_right = true
+				press_flag = true
+			case kashige_flag_left:
 				Player.kasa.y -= 60
 				Player.kasa.x += 60
 				Player.kasa.width += 60
-				Kashige_flag_hidari = false
-				Press_flag = true
+				kashige_flag_left = false
+				press_flag = true
 			}
 		}
 	} else {
-		Press_count += 1
+		press_count += 1
 	}
-	if Press_count == CountLimit {
-		Press_count = 0
-		Press_flag = false
+	if press_count == CountLimit {
+		press_count = 0
+		press_flag = false
 	}
 }
 
 func Player_Draw(screen *ebiten.Image) {
-	if Kashige_flag_hidari {
+	switch {
+	case kashige_flag_left:
 		image.Draw_kasa(screen, Img_kasa_tsuka, Player.body.x, Player.kasa.y-30, -30)
 		image.Draw(screen, Img_player, Player.body.x, Player.body.y+15, 0)
 		image.Draw_kasa(screen, Img_kasa, Player.body.x, Player.kasa.y-30, -30)
-	} else if Kashige_flag_migi {
+	case kashige_flag_right:
 		image.Draw_kasa(screen, Img_kasa_tsuka, Player.body.x-120, Player.kasa.y-30, 30)
 		image.Draw(screen, Img_player, Player.body.x, Player.body.y+15, 0)
 		image.Draw_kasa(screen, Img_kasa, Player.body.x-120, Player.kasa.y-30, 30)
-	} else {
+	default:
 		image.Draw_kasa(screen, Img_kasa_tsuka, Player.kasa.x, Player.kasa.y, 0)
 		image.Draw(screen, Img_player, Player.body.x, Player.body.y+15, 0)
 		image.Draw_kasa(screen, Img_kasa, Player.kasa.x, Player.kasa.y, 0)
