@@ -21,9 +21,7 @@ const (
 	Status_dead
 )
 
-var (
-	mplusNormalFont font.Face
-)
+var mplusNormalFont font.Face
 
 type Game struct {
 	Status       int
@@ -105,7 +103,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 0, 30, color.White)
 		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 2:
-		image.Draw(screen, Img_gameover, 180, 180, 0)
+		image.Draw(screen, Img_gameover, 250, 180, 0)
 		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 450, 450, color.Black)
 	}
 }
