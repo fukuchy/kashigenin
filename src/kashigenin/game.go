@@ -22,12 +22,12 @@ const (
 )
 
 var (
-	Score           int
 	mplusNormalFont font.Face
 )
 
 type Game struct {
 	Status       int
+	Score        int
 	ScreenWidth  int
 	ScreenHeight int
 }
@@ -71,12 +71,12 @@ func (g *Game) Update() error {
 		}
 	case 1:
 		Move()
-		if pop_passers() {
+		if g.pop_passers() {
 			g.Status = 2
 		}
 	case 2:
 		if ebiten.IsKeyPressed(ebiten.KeySpace) {
-			Score = 0
+			g.Score = 0
 			Counter = 0
 			Yokero_flag = false
 			Passers = nil
@@ -102,10 +102,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if Yokero_flag {
 			image.Draw(screen, Img_yokero, 180, 180, 0)
 		}
-		text.Draw(screen, "Score: "+strconv.Itoa(Score), mplusNormalFont, 0, 30, color.White)
+		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 0, 30, color.White)
 		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 2:
 		image.Draw(screen, Img_gameover, 180, 180, 0)
-		text.Draw(screen, "Score: "+strconv.Itoa(Score), mplusNormalFont, 450, 450, color.Black)
+		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 450, 450, color.Black)
 	}
 }

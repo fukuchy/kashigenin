@@ -43,7 +43,7 @@ func PasserHit() bool {
 	return false
 }
 
-func pop_passers() bool {
+func (g *Game) pop_passers() bool {
 	Counter++
 
 	if Counter == 200 {
@@ -64,7 +64,7 @@ func pop_passers() bool {
 	if Counter == 500 {
 		Yokero_flag = false
 		if !PasserHit() {
-			Score += len(Passers)
+			g.Score += len(Passers)
 		}
 		Passers = nil
 		Counter = 0
