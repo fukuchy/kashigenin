@@ -11,14 +11,6 @@ const (
 	RightLimit = 720
 )
 
-// var (
-// 	g.Player.press_flag,
-// 	up_flag,
-// 	kashige_flag_left,
-// 	kashige_flag_right bool
-// 	press_count int
-// )
-
 type Player struct {
 	player             Person
 	press_flag         bool
