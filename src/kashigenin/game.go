@@ -28,7 +28,7 @@ type Game struct {
 	Score        int
 	ScreenWidth  int
 	ScreenHeight int
-	Player       Person
+	Player       Player
 	Passers      Passers
 }
 

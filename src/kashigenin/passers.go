@@ -45,7 +45,7 @@ func (g *Game) PassersDraw(screen *ebiten.Image) {
 
 func (g *Game) PasserHit() bool {
 	for i := len(g.Passers.P_list) - 1; i >= 0; i-- {
-		if perhit(g.Player, g.Passers.P_list[i]) {
+		if perhit(g.Player.player, g.Passers.P_list[i]) {
 			g.Passers.P_list = append(g.Passers.P_list[:i], g.Passers.P_list[i+1:]...)
 			return true
 		}
