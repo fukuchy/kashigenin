@@ -11,10 +11,8 @@ import (
 var Counter int
 var Yokero_flag bool
 
-var Passers []Person
-
-func PassersDraw(screen *ebiten.Image) {
-	for _, passer := range Passers {
+func (g *Game) PassersDraw(screen *ebiten.Image) {
+	for _, passer := range g.Passers {
 		switch passer.num {
 		case 0:
 			image.Draw(screen, Img_passer0, passer.body.x, passer.body.y, 0)
@@ -33,10 +31,10 @@ func PassersDraw(screen *ebiten.Image) {
 	}
 }
 
-func PasserHit() bool {
-	for i := len(Passers) - 1; i >= 0; i-- {
-		if perhit(Player, Passers[i]) {
-			Passers = append(Passers[:i], Passers[i+1:]...)
+func (g *Game) PasserHit() bool {
+	for i := len(g.Passers) - 1; i >= 0; i-- {
+		if perhit(g.Player, g.Passers[i]) {
+			g.Passers = append(g.Passers[:i], g.Passers[i+1:]...)
 			return true
 		}
 	}
@@ -51,22 +49,22 @@ func (g *Game) pop_passers() bool {
 		if err != nil {
 			panic(err)
 		}
-		Passers = append(Passers, Passers_list[int(list_num.Int64())]...)
+		g.Passers = append(g.Passers, Passers_list[int(list_num.Int64())]...)
 	}
 	if Counter == 400 {
 		Yokero_flag = true
 	}
 	if Counter >= 400 {
-		if PasserHit() {
+		if g.PasserHit() {
 			return true
 		}
 	}
 	if Counter == 500 {
 		Yokero_flag = false
-		if !PasserHit() {
-			g.Score += len(Passers)
+		if !g.PasserHit() {
+			g.Score += len(g.Passers)
 		}
-		Passers = nil
+		g.Passers = nil
 		Counter = 0
 	}
 	return false

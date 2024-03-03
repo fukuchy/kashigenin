@@ -28,6 +28,8 @@ type Game struct {
 	Score        int
 	ScreenWidth  int
 	ScreenHeight int
+	Player       Person
+	Passers      []Person
 }
 
 func init() {
@@ -51,8 +53,11 @@ func init() {
 func NewGame() (*Game, error) {
 	g := &Game{
 		Status:       0,
+		Score:        0,
 		ScreenWidth:  960,
 		ScreenHeight: 840,
+		Player:       *NewPlayer(),
+		Passers:      []Person{},
 	}
 	return g, nil
 }
@@ -68,7 +73,7 @@ func (g *Game) Update() error {
 			g.Status = 1
 		}
 	case 1:
-		Move()
+		g.Move()
 		if g.pop_passers() {
 			g.Status = 2
 		}
@@ -77,7 +82,7 @@ func (g *Game) Update() error {
 			g.Score = 0
 			Counter = 0
 			Yokero_flag = false
-			Passers = nil
+			g.Passers = nil
 			g.Status = 1
 		}
 	}
@@ -95,8 +100,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		image.Draw(screen, Img_title, 180, 120, 0)
 		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 1:
-		Player_Draw(screen)
-		PassersDraw(screen)
+		g.Player_Draw(screen)
+		g.PassersDraw(screen)
 		if Yokero_flag {
 			image.Draw(screen, Img_yokero, 180, 180, 0)
 		}
