@@ -29,7 +29,7 @@ type Game struct {
 	ScreenWidth  int
 	ScreenHeight int
 	Player       Person
-	Passers      []Person
+	Passers      Passers
 }
 
 func init() {
@@ -57,7 +57,7 @@ func NewGame() (*Game, error) {
 		ScreenWidth:  960,
 		ScreenHeight: 840,
 		Player:       *NewPlayer(),
-		Passers:      []Person{},
+		Passers:      *NewPassers(),
 	}
 	return g, nil
 }
@@ -80,9 +80,9 @@ func (g *Game) Update() error {
 	case 2:
 		if ebiten.IsKeyPressed(ebiten.KeySpace) {
 			g.Score = 0
-			Counter = 0
-			Yokero_flag = false
-			g.Passers = nil
+			g.Passers.Counter = 0
+			g.Passers.Yokero_flag = false
+			g.Passers.P_list = nil
 			g.Status = 1
 		}
 	}
@@ -102,7 +102,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case 1:
 		g.Player_Draw(screen)
 		g.PassersDraw(screen)
-		if Yokero_flag {
+		if g.Passers.Yokero_flag {
 			image.Draw(screen, Img_yokero, 180, 180, 0)
 		}
 		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 0, 30, color.White)

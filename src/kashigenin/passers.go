@@ -8,11 +8,23 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-var Counter int
-var Yokero_flag bool
+type Passers struct {
+	P_list      []Person
+	Counter     int
+	Yokero_flag bool
+}
+
+func NewPassers() *Passers {
+	p := &Passers{
+		P_list:      []Person{},
+		Counter:     0,
+		Yokero_flag: false,
+	}
+	return p
+}
 
 func (g *Game) PassersDraw(screen *ebiten.Image) {
-	for _, passer := range g.Passers {
+	for _, passer := range g.Passers.P_list {
 		switch passer.num {
 		case 0:
 			image.Draw(screen, Img_passer0, passer.body.x, passer.body.y, 0)
@@ -32,9 +44,9 @@ func (g *Game) PassersDraw(screen *ebiten.Image) {
 }
 
 func (g *Game) PasserHit() bool {
-	for i := len(g.Passers) - 1; i >= 0; i-- {
-		if perhit(g.Player, g.Passers[i]) {
-			g.Passers = append(g.Passers[:i], g.Passers[i+1:]...)
+	for i := len(g.Passers.P_list) - 1; i >= 0; i-- {
+		if perhit(g.Player, g.Passers.P_list[i]) {
+			g.Passers.P_list = append(g.Passers.P_list[:i], g.Passers.P_list[i+1:]...)
 			return true
 		}
 	}
@@ -42,30 +54,30 @@ func (g *Game) PasserHit() bool {
 }
 
 func (g *Game) pop_passers() bool {
-	Counter++
+	g.Passers.Counter++
 
-	if Counter == 200 {
+	if g.Passers.Counter == 200 {
 		list_num, err := rand.Int(rand.Reader, big.NewInt(int64(len(Passers_list))))
 		if err != nil {
 			panic(err)
 		}
-		g.Passers = append(g.Passers, Passers_list[int(list_num.Int64())]...)
+		g.Passers.P_list = append(g.Passers.P_list, Passers_list[int(list_num.Int64())]...)
 	}
-	if Counter == 400 {
-		Yokero_flag = true
+	if g.Passers.Counter == 400 {
+		g.Passers.Yokero_flag = true
 	}
-	if Counter >= 400 {
+	if g.Passers.Counter >= 400 {
 		if g.PasserHit() {
 			return true
 		}
 	}
-	if Counter == 500 {
-		Yokero_flag = false
+	if g.Passers.Counter == 500 {
+		g.Passers.Yokero_flag = false
 		if !g.PasserHit() {
-			g.Score += len(g.Passers)
+			g.Score += len(g.Passers.P_list)
 		}
-		g.Passers = nil
-		Counter = 0
+		g.Passers.P_list = nil
+		g.Passers.Counter = 0
 	}
 	return false
 }
