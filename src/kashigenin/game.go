@@ -15,6 +15,7 @@ import (
 	"golang.org/x/image/font/opentype"
 )
 
+// ステータスを設定
 const (
 	Status_home = iota
 	Status_alive
@@ -23,6 +24,7 @@ const (
 
 var mplusNormalFont font.Face
 
+// ゲーム全体の構造体
 type Game struct {
 	Status       int
 	Score        int
@@ -32,6 +34,7 @@ type Game struct {
 	Passers      Passers
 }
 
+// フォントの設定と画像のロードを行う関数
 func init() {
 	tt, err := opentype.Parse(fonts.MPlus1pRegular_ttf)
 	if err != nil {
@@ -50,6 +53,7 @@ func init() {
 	Init_img()
 }
 
+// ゲームの初期化関数
 func NewGame() (*Game, error) {
 	g := &Game{
 		Status:       0,
@@ -66,18 +70,24 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 	return g.ScreenWidth, g.ScreenHeight
 }
 
+// ステータスに合わせて適切な関数を呼び出す関数
 func (g *Game) Update() error {
 	switch g.Status {
+
 	case 0:
+		// ホーム画面で Space key を押したらゲームを開始する
 		if ebiten.IsKeyPressed(ebiten.KeySpace) {
 			g.Status = 1
 		}
 	case 1:
+		// ゲームプレイ中はプレイヤーの操作を許可する
 		g.Move()
+		// 「避けろ！！」表示中に通行人と接触したらゲーム終了する．
 		if g.pop_passers() {
 			g.Status = 2
 		}
 	case 2:
+		// ゲームオーバー時に Space key を押したら変数を初期化してゲームを開始する
 		if ebiten.IsKeyPressed(ebiten.KeySpace) {
 			g.Score = 0
 			g.Passers.Counter = 0
@@ -92,22 +102,28 @@ func (g *Game) Update() error {
 	return nil
 }
 
+// ゲーム全体の描画関数
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{255, 245, 228, 0xff})
 	image.Draw(screen, Img_haikei, 0, 0, 0)
+	// ステータスによって表示する画像を選択する
 	switch g.Status {
 	case 0:
+		// ゲーム開始前にはタイトルと操作説明を表示
 		image.Draw(screen, Img_title, 180, 120, 0)
 		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 1:
+		// ゲーム開始後はプレイヤーと通行人を表示する
 		g.Player_Draw(screen)
 		g.PassersDraw(screen)
+		// Yokero_flag が true の間「避けろ!!」を表示する
 		if g.Passers.Yokero_flag {
 			image.Draw(screen, Img_yokero, 180, 180, 0)
 		}
+		// スコアと説明の表示
 		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 0, 30, color.White)
 		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 2:
+		// ゲームオーバー表示と最終スコア表示
 		image.Draw(screen, Img_gameover, 250, 180, 0)
 		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 450, 450, color.Black)
 	}

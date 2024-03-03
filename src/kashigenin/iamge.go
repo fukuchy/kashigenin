@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+// ゲーム内で使用する画像の宣言とロード
 var (
 	Img_haikei,
 	Img_player,

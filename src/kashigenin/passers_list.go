@@ -1,5 +1,6 @@
 package kashigenin
 
+// 通行人の配置のリスト
 var Passers_list = [][]Person{
 	{
 		{
