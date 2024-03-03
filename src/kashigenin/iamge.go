@@ -24,17 +24,17 @@ var (
 )
 
 func Init_img() {
-	Img_haikei = image.Load("material/haikei7.png")
-	Img_player = image.Load("material/player2.png")
+	Img_haikei = image.Load("material/haikei.png")
+	Img_player = image.Load("material/player.png")
 	Img_passer0 = image.Load("material/passer0.png")
 	Img_passer1 = image.Load("material/passer1.png")
 	Img_passer2 = image.Load("material/passer2.png")
 	Img_passer3 = image.Load("material/passer3.png")
-	Img_kasa_mae = image.Load("material/kasa4.png")
-	Img_kasa = image.Load("material/kasa5.png")
+	Img_kasa_mae = image.Load("material/kasa_all.png")
+	Img_kasa = image.Load("material/kasa_top.png")
 	Img_kasa_tsuka = image.Load("material/kasa_tsuka.png")
-	Img_yokero = image.Load("material/yokero2.png")
-	Img_title = image.Load("material/title2.png")
+	Img_yokero = image.Load("material/yokero.png")
+	Img_title = image.Load("material/title.png")
 	Img_gameover = image.Load("material/gameover.png")
 	Img_setsumei = image.Load("material/setsumei.png")
 }
