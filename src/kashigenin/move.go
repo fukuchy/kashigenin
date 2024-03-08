@@ -46,28 +46,36 @@ func NewPlayer() *Player {
 	return player
 }
 
+func NewPlayer_v(x, y, width, height float64, kashige string) *Player {
+	var player *Player
+	switch kashige {
+	case "migi":
+		player = &Player{
+			player: Person{
+				body: &Rectangle{x: x, y: y, width: width, height: height},
+				kasa: &Rectangle{x: x, y: y + 30, width: 240 - 60, height: 30},
+			},
+		}
+	case "hidari":
+		player = &Player{
+			player: Person{
+				body: &Rectangle{x: x, y: y, width: width, height: height},
+				kasa: &Rectangle{x: x - 60, y: y + 30, width: 240 - 60, height: 30},
+			},
+		}
+	default:
+		player = &Player{
+			player: Person{
+				body: &Rectangle{x: x, y: y, width: width, height: height},
+				kasa: &Rectangle{x: x, y: y - 30, width: 240, height: 30},
+			},
+		}
+	}
+	return player
+}
+
 func (g *Game) Move() {
 	if !g.Player.press_flag {
-		if !g.Player.kashige_flag_left && !g.Player.kashige_flag_right {
-			if ebiten.IsKeyPressed(ebiten.KeyUp) {
-				if g.Player.player.kasa.y > 210 {
-					g.Player.player.kasa.y -= 120
-				}
-				if g.Player.player.kasa.y == 210 {
-					g.Player.up_flag = true
-				}
-				g.Player.press_flag = true
-			}
-			if ebiten.IsKeyPressed(ebiten.KeyDown) {
-				if g.Player.player.kasa.y < 330 {
-					g.Player.player.kasa.y += 120
-				}
-				if g.Player.up_flag {
-					g.Player.up_flag = false
-				}
-				g.Player.press_flag = true
-			}
-		}
 		if ebiten.IsKeyPressed(ebiten.KeyRight) {
 			if g.Player.player.body.x < RightLimit {
 				g.Player.player.body.x += 60
