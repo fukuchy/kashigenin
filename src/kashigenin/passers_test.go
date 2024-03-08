@@ -14,15 +14,16 @@ func Test_passerCollision(t *testing.T) {
 		game k.Game
 		want bool
 	}{
-		{name: "not kashige, left", game: *setGame(500, "", 5), want: false,},
+		{name: "not kashige, left", game: *setGame(500, "", 5), want: false},
 	}
-	for _, c range cases {
+	for _, c := range cases {
+		c := c
 		t.Run(c.name, func(t *testing.T) {
 			t.Parallel()
 			result := c.game.PasserHit()
-			// if c.want != result {
-			// 	t.Errorf("Results do not match")
-			// }
+			if c.want != result {
+				t.Errorf("Results do not match")
+			}
 		})
 	}
 }

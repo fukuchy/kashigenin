@@ -15,6 +15,22 @@ import (
 	"golang.org/x/image/font/opentype"
 )
 
+var (
+	Img_haikei     = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/haikei.png")
+	Img_player     = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/player.png")
+	Img_passer0    = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/passer0.png")
+	Img_passer1    = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/passer1.png")
+	Img_passer2    = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/passer2.png")
+	Img_passer3    = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/passer3.png")
+	Img_kasa       = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/kasa_top.png")
+	Img_kasa_mae   = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/kasa_all.png")
+	Img_kasa_tsuka = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/kasa_tsuka.png")
+	Img_yokero     = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/yokero.png")
+	Img_title      = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/title.png")
+	Img_gameover   = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/gameover.png")
+	Img_setsumei   = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/setsumei.png")
+)
+
 // ステータスを設定
 const (
 	Status_home = iota
@@ -50,7 +66,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Init_img()
+	// image.Init_img()
 }
 
 // ゲームの初期化関数

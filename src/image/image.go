@@ -1,6 +1,7 @@
 package image
 
 import (
+	_ "image/png"
 	"log"
 	"math"
 
@@ -28,7 +29,7 @@ func Draw_kasa(screen *ebiten.Image, img *ebiten.Image, dx float64, dy float64, 
 }
 
 func Load(path string) *ebiten.Image {
-	img, _, err := ebitenutil.NewImageFromFile(path)
+	img, err := ebitenutil.NewImageFromURL(path)
 	if err != nil {
 		log.Fatal(err)
 	}
