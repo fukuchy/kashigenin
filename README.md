@@ -14,7 +14,7 @@ go run github.com/fukuchy/kashigenin@latest
 
 1. Pull codes
 ```
-https://github.com/fukuchy/kashigenin.git
+git pull https://github.com/fukuchy/kashigenin.git
 ```
 
 3. run the test
