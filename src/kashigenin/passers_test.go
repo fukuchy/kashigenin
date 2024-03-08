@@ -21,6 +21,7 @@ func Test_passerHit(t *testing.T) {
 		{name: "notHit,leftKashige", game: *setGame(360, "left", 2), want: false},
 		{name: "hit,left", game: *setGame(360, "", 3), want: true},
 		{name: "hit,right", game: *setGame(600, "", 3), want: true},
+		{name: "hit,mid", game: *setGame(480, "", 3), want: true},
 	}
 	for _, c := range cases {
 		c := c
