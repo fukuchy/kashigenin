@@ -38,6 +38,8 @@ func Test_passerCollision(t *testing.T) {
 // 	Passers      Passers
 // }
 
+// テスト用の Game 初期化関数
+// Player の x 座標、傘の傾げの向き、通行人の種類を選択する
 func setGame(x float64, kashige string, P_index int) *k.Game {
 
 	game, err := k.NewGame()
@@ -45,6 +47,7 @@ func setGame(x float64, kashige string, P_index int) *k.Game {
 		log.Fatal(err)
 	}
 	game.Player = *k.NewPlayer_v(x, 360, 120, 360, kashige)
+	// P_index で Passers_list の対応した通行人のセットを P_list に格納する
 	game.Passers.P_list = k.Passers_list[P_index]
 	return game
 }

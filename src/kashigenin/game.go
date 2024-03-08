@@ -15,6 +15,7 @@ import (
 	"golang.org/x/image/font/opentype"
 )
 
+// 画像のロード
 var (
 	Img_haikei     = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/haikei.png")
 	Img_player     = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/player.png")
@@ -140,7 +141,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 2:
 		// ゲームオーバー表示と最終スコア表示
-		image.Draw(screen, Img_gameover, 250, 180, 0)
+		image.Draw(screen, Img_gameover, 180, 180, 0)
 		text.Draw(screen, "Score: "+strconv.Itoa(g.Score), mplusNormalFont, 450, 450, color.Black)
 	}
 }
