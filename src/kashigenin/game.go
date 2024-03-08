@@ -1,15 +1,18 @@
 package kashigenin
 
 import (
+	_ "embed"
 	"image/color"
 	_ "image/png"
 	"log"
 	"os"
 	"strconv"
 
+	// "github.com/fukuchy/kashigenin/material/fonts"
 	"github.com/fukuchy/kashigenin/src/image"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
+
+	// "github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
@@ -30,6 +33,12 @@ var (
 	Img_title      = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/title.png")
 	Img_gameover   = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/gameover.png")
 	Img_setsumei   = image.Load("https://raw.githubusercontent.com/fukuchy/kashigenin/main/material/setsumei.png")
+)
+
+// フォントのロード
+var (
+	//go:embed mplus-1p-regular.ttf
+	MPlus1pRegular_ttf []byte
 )
 
 // ステータスを設定
@@ -53,7 +62,7 @@ type Game struct {
 
 // フォントの設定と画像のロードを行う関数
 func init() {
-	tt, err := opentype.Parse(fonts.MPlus1pRegular_ttf)
+	tt, err := opentype.Parse(MPlus1pRegular_ttf)
 	if err != nil {
 		log.Fatal(err)
 	}
