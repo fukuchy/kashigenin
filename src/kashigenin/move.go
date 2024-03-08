@@ -49,14 +49,14 @@ func NewPlayer() *Player {
 func NewPlayer_v(x, y, width, height float64, kashige string) *Player {
 	var player *Player
 	switch kashige {
-	case "migi":
+	case "right":
 		player = &Player{
 			player: Person{
 				body: &Rectangle{x: x, y: y, width: width, height: height},
 				kasa: &Rectangle{x: x, y: y + 30, width: 240 - 60, height: 30},
 			},
 		}
-	case "hidari":
+	case "left":
 		player = &Player{
 			player: Person{
 				body: &Rectangle{x: x, y: y, width: width, height: height},

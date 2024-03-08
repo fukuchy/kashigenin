@@ -14,7 +14,13 @@ func Test_passerCollision(t *testing.T) {
 		game k.Game
 		want bool
 	}{
-		{name: "not kashige, left", game: *setGame(500, "", 5), want: false},
+		{name: "notCollision,left", game: *setGame(500, "", 5), want: false},
+		{name: "notCollision,right", game: *setGame(0, "", 4), want: false},
+		{name: "notCollision,midle", game: *setGame(360, "", 6), want: false},
+		{name: "notCollision,rightKashige", game: *setGame(360, "right", 1), want: false},
+		{name: "notCollision,leftKashige", game: *setGame(360, "left", 2), want: false},
+		{name: "collision,left", game: *setGame(360, "", 3), want: true},
+		{name: "collision,right", game: *setGame(600, "", 3), want: true},
 	}
 	for _, c := range cases {
 		c := c
@@ -27,16 +33,6 @@ func Test_passerCollision(t *testing.T) {
 		})
 	}
 }
-
-// Game struct の構造
-// type Game struct {
-// 	Status       int
-// 	Score        int
-// 	ScreenWidth  int
-// 	ScreenHeight int
-// 	Player       Player
-// 	Passers      Passers
-// }
 
 // テスト用の Game 初期化関数
 // Player の x 座標、傘の傾げの向き、通行人の種類を選択する
