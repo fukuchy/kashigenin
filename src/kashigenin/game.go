@@ -8,11 +8,8 @@ import (
 	"os"
 	"strconv"
 
-	// "github.com/fukuchy/kashigenin/material/fonts"
 	"github.com/fukuchy/kashigenin/src/image"
 	"github.com/hajimehoshi/ebiten/v2"
-
-	// "github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
