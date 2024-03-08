@@ -136,8 +136,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		image.Draw(screen, Img_setsumei, 0, 720, 0)
 	case 1:
 		// ゲーム開始後はプレイヤーと通行人を表示する
-		g.Player_Draw(screen)
 		g.PassersDraw(screen)
+		g.Player_Draw(screen)
 		// Yokero_flag が true の間「避けろ!!」を表示する
 		if g.Passers.Yokero_flag {
 			image.Draw(screen, Img_yokero, 180, 180, 0)
