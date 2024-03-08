@@ -26,6 +26,7 @@ func Test_passerHit(t *testing.T) {
 		c := c
 		t.Run(c.name, func(t *testing.T) {
 			t.Parallel()
+			// もし想定と結果が違ったらエラー表示
 			result := c.game.PasserHit()
 			if c.want != result {
 				t.Errorf("Results do not match")

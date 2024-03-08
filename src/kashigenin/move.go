@@ -6,11 +6,14 @@ import (
 )
 
 const (
+	// ボタンのクールタイム
 	CountLimit = 5
+	// Player が移動範囲
 	LeftLimit  = 120
 	RightLimit = 720
 )
 
+// プレイヤーの構造体
 type Player struct {
 	player             Person
 	press_flag         bool
@@ -20,6 +23,7 @@ type Player struct {
 	press_count        int
 }
 
+// プレイヤーの初期化関数
 func NewPlayer() *Player {
 	player := &Player{
 		player: Person{
@@ -46,8 +50,10 @@ func NewPlayer() *Player {
 	return player
 }
 
+// テストコード用の座標指定プレイヤー初期化関数
 func NewPlayer_v(x, y, width, height float64, kashige string) *Player {
 	var player *Player
+	// kashige 変数によって傘を傾げた状態で初期化
 	switch kashige {
 	case "right":
 		player = &Player{
@@ -74,8 +80,11 @@ func NewPlayer_v(x, y, width, height float64, kashige string) *Player {
 	return player
 }
 
+// プレイヤーの移動関数
 func (g *Game) Move() {
+	// press_flag が false のときのみ入力を受け付ける
 	if !g.Player.press_flag {
+		// 左右の移動
 		if ebiten.IsKeyPressed(ebiten.KeyRight) {
 			if g.Player.player.body.x < RightLimit {
 				g.Player.player.body.x += 60
@@ -90,6 +99,7 @@ func (g *Game) Move() {
 			}
 			g.Player.press_flag = true
 		}
+		// 傘の傾げ
 		if ebiten.IsKeyPressed(ebiten.KeyQ) {
 			switch {
 			case g.Player.player.kasa.y >= 330 && g.Player.player.kasa.y < 390:
@@ -123,13 +133,16 @@ func (g *Game) Move() {
 	} else {
 		g.Player.press_count += 1
 	}
+	// ボタンの入力にクールタイムを設けるために、一度 press_flag が true になったら 5 カウント経ってから press_flag を false にする
 	if g.Player.press_count == CountLimit {
 		g.Player.press_count = 0
 		g.Player.press_flag = false
 	}
 }
 
+// プレイヤーの描画関数
 func (g *Game) Player_Draw(screen *ebiten.Image) {
+	// 傘の傾げによって描画する位置や角度を変更する
 	switch {
 	case g.Player.kashige_flag_left:
 		image.Draw_kasa(screen, Img_kasa_tsuka, g.Player.player.body.x, g.Player.player.kasa.y-30, -30)
