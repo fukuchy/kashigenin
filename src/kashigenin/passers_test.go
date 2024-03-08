@@ -7,20 +7,20 @@ import (
 	k "github.com/fukuchy/kashigenin/src/kashigenin"
 )
 
-func Test_passerCollision(t *testing.T) {
+func Test_passerHit(t *testing.T) {
 	t.Parallel()
 	cases := []struct {
 		name string
 		game k.Game
 		want bool
 	}{
-		{name: "notCollision,left", game: *setGame(500, "", 5), want: false},
-		{name: "notCollision,right", game: *setGame(0, "", 4), want: false},
-		{name: "notCollision,midle", game: *setGame(360, "", 6), want: false},
-		{name: "notCollision,rightKashige", game: *setGame(360, "right", 1), want: false},
-		{name: "notCollision,leftKashige", game: *setGame(360, "left", 2), want: false},
-		{name: "collision,left", game: *setGame(360, "", 3), want: true},
-		{name: "collision,right", game: *setGame(600, "", 3), want: true},
+		{name: "notHit,left", game: *setGame(500, "", 5), want: false},
+		{name: "notHit,right", game: *setGame(0, "", 4), want: false},
+		{name: "notHit,midle", game: *setGame(360, "", 6), want: false},
+		{name: "notHit,rightKashige", game: *setGame(360, "right", 1), want: false},
+		{name: "notHit,leftKashige", game: *setGame(360, "left", 2), want: false},
+		{name: "hit,left", game: *setGame(360, "", 3), want: true},
+		{name: "hit,right", game: *setGame(600, "", 3), want: true},
 	}
 	for _, c := range cases {
 		c := c
